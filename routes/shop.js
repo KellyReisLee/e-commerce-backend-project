@@ -1,10 +1,12 @@
 const router = require('express').Router();
-
+const path = require('path')
+const adminData = require('./admin')
 
 
 router.get('/', (req, res, next) => {
   console.log('One middleware')
-  res.send('<h1>Hello from Express</h1>')
+  console.log('shop.js', adminData.products)
+  res.sendFile(path.join(__dirname, '..', 'views', 'shop.html'))
 })
 
 
