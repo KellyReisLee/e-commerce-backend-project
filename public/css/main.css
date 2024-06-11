@@ -106,3 +106,9 @@ main {
   background-color: #00695c;
   color: white;
 }
+
+.not-found {
+  text-align: center;
+  color: gray;
+
+}
