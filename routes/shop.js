@@ -8,7 +8,14 @@ router.get('/', (req, res, next) => {
   console.log('shop.js', adminData.products)
   const products = adminData.products;
   // res.sendFile(path.join(__dirname, '..', 'views', 'shop.html'))
-  res.render('shop', { prods: products, pageTitle: 'Shop', path: '/' })
+  res.render('shop', {
+    prods: products,
+    pageTitle: 'Shop',
+    path: '/',
+    hasProducts: products.length > 0,
+    activeShop: true,
+    productCSS: true
+  })
 })
 
 
