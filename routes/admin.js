@@ -1,20 +1,10 @@
-const router = require('express').Router()
-const path = require('path');
-const { title } = require('process');
-const products = [];
 
-router.get('/add-product', (req, res, next) => {
-  console.log('In another middleware')
-  //res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'))
-  res.render('add-product', { pageTitle: 'Add Product', path: '/admin/add-product', formsCSS: true, productCSS: true, activeAddProduct: true })
-})
+const express = require('express');
+const router = express.Router();
+const productsController = require('../controllers/products')
+router.get('/add-product', productsController.getAllProducts)
 
-router.post('/add-product', (req, res, next) => {
-  products.push({ title: req.body.title })
-  res.redirect('/')
-})
+router.post('/add-product', productsController.addProducts)
 
 
-module.exports = {
-  router, products
-}
+module.exports = router
