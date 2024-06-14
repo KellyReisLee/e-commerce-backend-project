@@ -7,7 +7,7 @@ const Product = require('../models/product')
 exports.getAllProducts = async (req, res, next) => {
   //console.log('In another middleware')
   //res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'))
-  res.render('add-product', { pageTitle: 'Add Product', path: '/admin/add-product', formsCSS: true, productCSS: true, activeAddProduct: true })
+  res.render('admin/add-product', { pageTitle: 'Add Product', path: '/admin/add-product', formsCSS: true, productCSS: true, activeAddProduct: true })
 }
 
 
@@ -19,16 +19,18 @@ exports.addProducts = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-  const products = Product.fetchAllData();
-  // res.sendFile(path.join(__dirname, '..', 'views', 'shop.html'))
-  res.render('shop', {
-    prods: products,
-    pageTitle: 'Shop',
-    path: '/',
-    hasProducts: products.length > 0,
-    activeShop: true,
-    productCSS: true
-  })
+  Product.fetchAllData(products => {
+    // res.sendFile(path.join(__dirname, '..', 'views', 'shop.html'))
+    res.render('shop/product-list', {
+      prods: products,
+      pageTitle: 'Shop',
+      path: '/',
+      hasProducts: products.length > 0,
+      activeShop: true,
+      productCSS: true
+    })
+  });
+
 }
 
 
