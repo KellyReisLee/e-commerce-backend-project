@@ -23,9 +23,19 @@
               <%= product.description %>
             </p>
           </div>
-          <div class="card__actions">
-            <button class="btn">Edit </button>
-            <button class="btn">Delete </button>
+          <div class="card__actions__admin">
+            <!-- Edit vai direcionar para outra pagina, no path recebe the id -->
+            <a href="/admin/edit-product" >
+              <button class="btn-admin">
+                Edit
+              </button>
+               </a>
+
+            <!--Delete specific product  -->
+            <form action="/admin/delete-product" method="POST">
+              <button type="submit" class="btn-admin">Delete </button>
+            </form>
+          
           </div>
         </article>
         <% } %>
