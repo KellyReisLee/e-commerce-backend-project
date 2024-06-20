@@ -8,18 +8,15 @@
       <hr/>
       <div class="main-container-detail">
         <div class="image-detail">
-          <img src="<%= prod.imageUrl %>" alt="<%= prod.title %> "/>
+          <img src="<%= product.imageUrl %>" alt="<%= product.title %> "/>
         </div>
         <div class="content-detail">
-          <h2 class="title-detail"><%= prod.title %></h2>
+          <h2 class="title-detail"><%= product.title %></h2>
          <div class="text-detail">
           <h3>Description:</h3>
-          <p><%= prod.description  %></p>
-          <h3>Price: <%= prod.price %></h3>
-          <form class="form-detail-btn" action="/cart" method="post">
-            <button class="btn" type="submit">Add to Cart</button>
-            <input type="hidden" name="productId" value="<%= prod.id %>"/>
-           </form>
+          <p><%= product.description  %></p>
+          <h3>Price: <%= product.price %></h3>
+          <%-include('../includes/add-cart.ejs') %>
          </div>
         </div>
       </div>
