@@ -134,6 +134,11 @@ main {
 }
 
 
+.centered {
+  text-align: center;
+  width: 100%;
+}
+
 
 /* Mobile styles css */
 

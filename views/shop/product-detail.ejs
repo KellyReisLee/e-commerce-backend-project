@@ -2,7 +2,28 @@
     <link rel="stylesheet" href="/css/product.css" />
   </head>
   <body>
-   
     <%-include('../includes/navigation.ejs') %>
+    <main class="centered">
+      <h1 class="title-page-detail">Product Detail</h1>
+      <hr/>
+      <div class="main-container-detail">
+        <div class="image-detail">
+          <img src="<%= prod.imageUrl %>" alt="<%= prod.title %> "/>
+        </div>
+        <div class="content-detail">
+          <h2 class="title-detail"><%= prod.title %></h2>
+         <div class="text-detail">
+          <h3>Description:</h3>
+          <p><%= prod.description  %></p>
+          <h3>Price: <%= prod.price %></h3>
+          <form class="form-detail-btn" action="/cart" method="post">
+            <button class="btn" type="submit">Add to Cart</button>
+            <input type="hidden" name="productId" value="<%= prod.id %>"/>
+           </form>
+         </div>
+        </div>
+      </div>
+    
+    </main>
 
     <%-include('../includes/end.ejs') %>
