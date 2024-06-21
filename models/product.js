@@ -13,7 +13,8 @@ const getProductsFromFile = cb => {
 }
 
 module.exports = class Product {
-  constructor(title, imageUrl, description, price) {
+  constructor(id, title, imageUrl, description, price) {
+    this.id = id;
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
@@ -22,8 +23,7 @@ module.exports = class Product {
   }
 
   save() {
-    let idNumber = Math.random().toString().split('.')[1]
-    this.id = idNumber;
+
     //'p e  filepath tem o mesmo caminho.'
     // const p = path.join(path.dirname(require.main.filename), 'data', 'products.json');
     const filePath = path.join(__dirname, '..', 'data', 'products.json');
@@ -32,10 +32,23 @@ module.exports = class Product {
 
     getProductsFromFile(
       products => {
-        products.push(this)
-        fs.writeFile(p, JSON.stringify(products), err => {
-          console.log(err)
-        })
+        if (this.id) {
+          const existingProductIndex = products.findIndex(p => p.id === this.id)
+          const updatedProducts = [...products];
+          updatedProducts[existingProductIndex] = this;
+
+          fs.writeFile(p, JSON.stringify(updatedProducts), (err) => {
+            console.log(err)
+          })
+        } else {
+          let idNumber = Math.random().toString().split('.')[1]
+          this.id = idNumber;
+          products.push(this)
+          fs.writeFile(p, JSON.stringify(products), err => {
+            console.log(err)
+          })
+        }
+
       }
     )
   }
