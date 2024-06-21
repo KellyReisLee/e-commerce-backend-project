@@ -11,7 +11,7 @@ body {
 }
 
 main {
-  padding: 1rem;
+  padding: 2rem;
   margin: auto;
 }
 
@@ -54,7 +54,7 @@ main {
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: start;
   align-items: stretch;
 }
 
@@ -222,7 +222,8 @@ main {
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 2.5rem;
+  justify-content: center;
   align-items: stretch;
 }
 
