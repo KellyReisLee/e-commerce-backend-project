@@ -9,6 +9,7 @@ const p = path.join(
 );
 
 module.exports = class Cart {
+
   static addProduct(id, productPrice) {
     // Fetch the previous cart
     fs.readFile(p, (err, fileContent) => {
@@ -46,12 +47,14 @@ module.exports = class Cart {
       }
       const updatedCart = { ...JSON.parse(fileContent) };
       const product = updatedCart.products.find(prod => prod.id === id);
+      if (!product) {
+        return
+      }
       const productQty = product.qty;
       updatedCart.products = updatedCart.products.filter(
         prod => prod.id !== id
       );
-      updatedCart.totalPrice =
-        updatedCart.totalPrice - productPrice * productQty;
+      updatedCart.totalPrice = updatedCart.totalPrice - productPrice * productQty;
 
       fs.writeFile(p, JSON.stringify(updatedCart), err => {
         console.log(err);
@@ -59,14 +62,22 @@ module.exports = class Cart {
     });
   }
 
+
   static getCart(cb) {
     fs.readFile(p, (err, fileContent) => {
-      const cart = JSON.parse(fileContent);
       if (err) {
-        cb(null);
-      } else {
-        cb(cart);
+        return cb(null); // Se houver erro ao ler o arquivo, retorna null
       }
+
+      let cart;
+      try {
+        cart = JSON.parse(fileContent);
+      } catch (parseError) {
+        console.error("Failed to parse JSON: ", parseError);
+        return cb(null); // Retorna null se houver erro de parse
+      }
+
+      cb(cart);
     });
   }
 };

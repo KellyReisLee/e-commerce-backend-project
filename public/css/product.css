@@ -93,3 +93,10 @@
   justify-content: center;
   align-items: center;
 }
+
+/* cart by kelly */
+.cart-items-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
