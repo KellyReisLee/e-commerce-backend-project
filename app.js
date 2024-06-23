@@ -15,7 +15,8 @@ app.set('views', 'views')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-db.execute('SELECT * FROM products').then((result) => console.log(result[0], result[1])).catch((err) => console.log(err))
+//Checking if mySQL database is working.
+// db.execute('SELECT * FROM products').then((result) => console.log(result[0], result[1])).catch((err) => console.log(err))
 
 app.use('/admin', adminRoutes)
 app.use(shopRoutes)
