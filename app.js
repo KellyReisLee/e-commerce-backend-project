@@ -6,7 +6,7 @@ const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
 const errorController = require('./controllers/404')
-const db = require('./util/database')
+const sequelize = require('./util/database')
 
 
 app.set('view engine', 'ejs')
@@ -24,4 +24,8 @@ app.use(shopRoutes)
 
 app.use(errorController.notFound)
 
-app.listen(3000)
+sequelize.sync().then((result) => {
+  //console.log(result)
+  app.listen(3000)
+}).catch((err) => console.log(err))
+

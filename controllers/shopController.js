@@ -1,6 +1,6 @@
 
-const Product = require('../models/product');
-const Cart = require('../models/cart')
+const Product = require('../models-1/product');
+const Cart = require('../models-1/cart')
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll().then(([rows, fieldData]) => {
