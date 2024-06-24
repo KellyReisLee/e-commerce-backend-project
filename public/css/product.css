@@ -68,6 +68,12 @@
 
 .content-detail h3 {
   margin: 0;
+
+}
+
+.price-detail {
+  padding-bottom: 1.8rem;
+
 }
 
 .content-detail p {
@@ -84,9 +90,10 @@
 }
 
 .form-detail-btn {
-  margin-top: 2rem;
+  margin-top: 3rem;
 
 }
+
 
 .card__actions {
   display: flex;
