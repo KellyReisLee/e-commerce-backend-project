@@ -11,7 +11,7 @@ exports.getProducts = (req, res, next) => {
         pageTitle: 'All Products',
         path: '/products'
       });
-      console.log(products)
+
     }
     )
     .catch((err) => console.log(err))
@@ -22,6 +22,7 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const { productId } = req.params;
 
+  //Or do this: Retorna um array.
   // Product.findAll({
   //   where: {
   //     authorId: 2,
@@ -47,7 +48,7 @@ exports.getIndex = (req, res, next) => {
         pageTitle: 'Shop',
         path: '/'
       });
-      console.log(products)
+
     }
     )
     .catch((err) => console.log(err))
