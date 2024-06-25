@@ -6,7 +6,9 @@ const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
 const errorController = require('./controllers/404')
-const sequelize = require('./util/database')
+const sequelize = require('./util/database');
+const Product = require('./models/product');
+const User = require('./models/user')
 
 
 app.set('view engine', 'ejs')
@@ -24,8 +26,14 @@ app.use(shopRoutes)
 
 app.use(errorController.notFound)
 
-sequelize.sync().then((result) => {
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+
+sequelize.sync({ alter: true }).then((result) => {
   //console.log(result)
-  app.listen(3000)
+
 }).catch((err) => console.log(err))
 
+app.listen(3000, () => {
+  console.log('Listening in PORT 3000')
+})
