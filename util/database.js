@@ -3,7 +3,11 @@
 const Sequelize = require("sequelize")
 
 // New Instance:
-const sequelize = new Sequelize('node_complete', 'root', process.env.DATABASE_PASSWORD, { dialect: 'mysql', host: 'localhost' })
+const sequelize = new Sequelize(
+  'node_complete',
+  'root',
+  process.env.DATABASE_PASSWORD,
+  { dialect: 'mysql', host: 'localhost' })
 
 
 
