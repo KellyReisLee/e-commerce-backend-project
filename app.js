@@ -45,7 +45,7 @@ app.use(shopRoutes);
 // Sincroniza com database:
 sequelize
   // .sync({ force: true })
-  .sync({ force: true })
+  .sync({ alter: true })
   .then(result => {
     //console.log(result)
     app.listen(3000)

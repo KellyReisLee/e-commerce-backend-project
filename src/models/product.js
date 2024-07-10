@@ -10,9 +10,24 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Um produto pertence a um usuário (admin)
+      Product.belongsTo(models.User, {
+        foreignKey: 'admin_id',
+        as: 'admin',
+        onDelete: 'CASCADE',
+      });
+
+      // Um produto pode estar em muitos carrinhos e um carrinho pode ter muitos produtos
+      Product.belongsToMany(models.Cart, {
+        through: models.CartItem,
+        as: 'carts',
+        foreignKey: 'product_id',
+        otherKey: 'cart_id',
+        onDelete: 'CASCADE',
+      });
     }
   }
+
   Product.init({
     title: {
       type: DataTypes.STRING,
@@ -29,11 +44,12 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    admin_id
   }, {
     sequelize,
     modelName: 'Product',
     tableName: 'products'
   });
   return Product;
-};
+}

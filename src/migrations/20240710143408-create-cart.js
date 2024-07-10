@@ -9,19 +9,33 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          // Nome da tabela referenciada
+          model: 'users',
+          // Chave da tabela referenciada
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       }
     });
+
+    // Adiciona índice para a coluna userId
+    await queryInterface.addIndex('carts', ['userId']);
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('carts');
   }
