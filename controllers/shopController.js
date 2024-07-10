@@ -1,6 +1,6 @@
 
 const Product = require('../models/product');
-//const Cart = require('../models/cart')
+const Cart = require('../models/cart')
 
 exports.getProducts = (req, res, next) => {
   // Estmaos usando os métodos publicos provenientes da class, sem precisar instanciar um objeto.
@@ -112,6 +112,28 @@ exports.postCart = (req, res, next) => {
     .catch(err => console.log(err));
 }
 
+
+
+exports.postDeleteCart = (req, res, next) => {
+  const prodId = req.body.productId;
+  req.user
+    .getCart()
+    .then(cart => {
+      return cart.getProducts({ where: { id: prodId } });
+    })
+    .then(products => {
+      const product = products[0];
+      return product.cartItem.destroy();
+    })
+    .then(result => {
+      res.redirect('/cart');
+    })
+    .catch(err => console.log(err));
+
+
+}
+
+
 exports.getCheckout = (req, res, next) => {
   res.render('shop/checkout', {
     path: '/checkout',
@@ -126,16 +148,3 @@ exports.getOrders = (req, res, next) => {
     pageTitle: 'Orders'
   })
 }
-
-
-exports.postDeleteCart = (req, res, next) => {
-  const { productId } = req.body;
-
-  Product.findById(productId, product => {
-    Cart.deleteProduct(productId, product.price);
-    res.redirect('/cart')
-  })
-
-
-}
-
