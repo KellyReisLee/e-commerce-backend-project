@@ -2,15 +2,15 @@
 require('dotenv').config()
 const express = require('express')
 const app = express();
-const adminRoutes = require('./routes/admin')
-const shopRoutes = require('./routes/shop')
+const adminRoutes = require('./src/routes/admin')
+const shopRoutes = require('./src/routes/shop')
 const path = require('path')
-const errorController = require('./controllers/404')
-const sequelize = require('./util/database');
-const Product = require('./models/product');
-const User = require('./models/user');
-const Cart = require('./models/cart');
-const CartItem = require('./models/cart-item');
+const errorController = require('./src/controllers/404')
+const sequelize = require('./src/util/database');
+const Product = require('./src/models/product');
+const User = require('./src/models/user');
+const Cart = require('./src/models/cart');
+const CartItem = require('./src/models/cart-item');
 
 
 app.set('view engine', 'ejs')
@@ -35,17 +35,17 @@ app.use(shopRoutes);
 
 //app.use(errorController.notFound)
 
-Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
-User.hasMany(Product);
-User.hasOne(Cart);
-Cart.belongsTo(User)
-Cart.belongsToMany(Product, { through: CartItem })
-Product.belongsToMany(Cart, { through: CartItem })
+// Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+// User.hasMany(Product);
+// User.hasOne(Cart);
+// Cart.belongsTo(User)
+// Cart.belongsToMany(Product, { through: CartItem })
+// Product.belongsToMany(Cart, { through: CartItem })
 
 // Sincroniza com database:
 sequelize
   // .sync({ force: true })
-  .sync({ alter: true })
+  .sync({ force: true })
   .then(result => {
     //console.log(result)
     app.listen(3000)
