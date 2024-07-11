@@ -32,8 +32,7 @@ module.exports = {
       }
     });
 
-    // Adiciona índice para a coluna userId
-    await queryInterface.addIndex('carts', ['userId']);
+
   },
 
   async down(queryInterface, Sequelize) {
