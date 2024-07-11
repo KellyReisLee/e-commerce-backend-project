@@ -113,6 +113,11 @@ main {
 
 }
 
+.title {
+  text-align: center;
+  color: gray;
+}
+
 /* Buttons in products admin */
 .card__actions__admin {
   display: flex;

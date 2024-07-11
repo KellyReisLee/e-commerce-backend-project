@@ -6,16 +6,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Um item de carrinho pertence a um produto
       CartItem.belongsTo(models.Product, {
-        foreignKey: 'productId',  // Nomes das colunas em camelCase
-        as: 'product',
-        onDelete: 'CASCADE',
+        foreignKey: 'productId',  // Nome da chave estrangeira para o produto
+
+        onDelete: 'CASCADE'
       });
 
       // Um item de carrinho pertence a um carrinho
       CartItem.belongsTo(models.Cart, {
-        foreignKey: 'cartId',
-        as: 'cart',
-        onDelete: 'CASCADE',
+        foreignKey: 'cartId',  // Nome da chave estrangeira para o carrinho
+
+        onDelete: 'CASCADE'
       });
     }
   }
@@ -23,31 +23,30 @@ module.exports = (sequelize, DataTypes) => {
   CartItem.init({
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,  // Definindo um valor padrão para quantity
+      allowNull: false
     },
     productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'products',
-        key: 'id',
+        key: 'id'
       },
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE'
     },
     cartId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'carts',
-        key: 'id',
+        key: 'id'
       },
-      onDelete: 'CASCADE',
-    },
+      onDelete: 'CASCADE'
+    }
   }, {
     sequelize,
     modelName: 'CartItem',
-    tableName: 'cart_items',
+    tableName: 'cart_items'
   });
 
   return CartItem;

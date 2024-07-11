@@ -6,31 +6,35 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Um carrinho pertence a um usuário
       Cart.belongsTo(models.User, {
-        foreignKey: 'user_id',
-        as: 'userId',
-        onDelete: 'CASCADE',
+        foreignKey: 'userId',  // Nome da chave estrangeira para o usuário
+
+        onDelete: 'CASCADE'
       });
 
-      // Um carrinho pode ter muitos produtos através de CartItem
-      Cart.hasMany(models.Product, {
+      // Um carrinho pode ter muitos produtos e um produto pode estar em muitos carrinhos
+      Cart.belongsToMany(models.Product, {
         through: models.CartItem,
-        as: 'products',
         foreignKey: 'cartId',
         otherKey: 'productId',
-        as: 'products',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       });
-
     }
   }
 
   Cart.init({
-
-
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
+    }
   }, {
     sequelize,
     modelName: 'Cart',
-    tableName: 'carts',
+    tableName: 'carts'
   });
 
   return Cart;

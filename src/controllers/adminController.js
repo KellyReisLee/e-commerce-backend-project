@@ -1,5 +1,6 @@
 
-const Product = require('../models/product');
+//const Product = require('../models/product');
+const db = require('../models');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -53,7 +54,7 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   const { productId, title, price, imageUrl, description } = req.body;
 
-  Product.findByPk(productId)
+  db.Product.findByPk(productId)
     .then(product => {
       if (!product) {
         // handle case where product is not found
@@ -95,7 +96,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findByPk(prodId).then((product) => {
+  db.Product.findByPk(prodId).then((product) => {
     return product.destroy()
   }).then(() => {
     console.log('Product Deleted!')

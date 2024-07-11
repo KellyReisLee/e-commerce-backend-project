@@ -1,10 +1,12 @@
 
-const Product = require('../models/product');
-const Cart = require('../models/cart')
+//const Product = require('../models/product');
+const db = require('../models');
+
 
 exports.getProducts = (req, res, next) => {
   // Estmaos usando os métodos publicos provenientes da class, sem precisar instanciar um objeto.
-  Product.findAll()
+
+  db.Product.findAll()
     .then((products) => {
       res.render('shop/product-list', {
         prods: products,
@@ -33,7 +35,7 @@ exports.getProduct = (req, res, next) => {
   //     }))
   //   .catch(err => console.log(err))
 
-  Product.findByPk(productId).then((product) => {
+  db.Product.findByPk(productId).then((product) => {
     //console.log(product);
     res.render('shop/product-detail', {
       product: product,
@@ -45,7 +47,7 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.findAll()
+  db.Product.findAll()
     .then((products) => {
       res.render('shop/index', {
         prods: products,
@@ -67,6 +69,7 @@ exports.getCart = (req, res, next) => {
     .then((cart) => {
       return cart.getProducts()
         .then((cartProducts) => {
+
           res.render('shop/cart', {
             path: '/cart',
             pageTitle: 'Your Cart',
@@ -99,7 +102,7 @@ exports.postCart = (req, res, next) => {
         newQuantity = oldQuantity + 1;
         return product;
       }
-      return Product.findByPk(prodId);
+      return db.Product.findByPk(prodId);
     })
     .then(product => {
       return fetchedCart.addProduct(product, {
@@ -123,7 +126,7 @@ exports.postDeleteCart = (req, res, next) => {
     })
     .then(products => {
       const product = products[0];
-      return product.cartItem.destroy();
+      return product.CartItem.destroy();
     })
     .then(result => {
       res.redirect('/cart');

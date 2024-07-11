@@ -102,8 +102,26 @@
 }
 
 /* cart by kelly */
+
 .cart-items-container {
   display: flex;
-  gap: 2rem;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: rgb(80, 135, 136);
+  border-radius: 10px;
+}
+
+.cart-items-container p {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.container-cart {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  padding: 0.4rem 0;
+
 }
