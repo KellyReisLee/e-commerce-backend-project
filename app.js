@@ -46,6 +46,9 @@ app.use(errorController.notFound)
 // Cart.belongsTo(User)
 // Cart.belongsToMany(Product, { through: CartItem })
 // Product.belongsToMany(Cart, { through: CartItem })
+// Order.belongsTo(User);
+// User.hasMany(Order);
+// Order.belongsToMany(Product, { through: OrderItem });
 
 // Sincroniza com database:
 // sequelize
