@@ -6,16 +6,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Um produto pertence a um usuário (admin)
       Product.belongsTo(models.User, {
-        foreignKey: 'userId',  // Nome da chave estrangeira no banco de dados
-        // as: 'userId',  // Nome da associação para evitar o conflito
+        foreignKey: 'user_id',  // Nome da chave estrangeira no banco de dados
+        as: 'admin',  // Alias para a associação
         onDelete: 'CASCADE'
       });
 
       // Um produto pode estar em muitos carrinhos e um carrinho pode ter muitos produtos
       Product.belongsToMany(models.Cart, {
         through: models.CartItem,
-        foreignKey: 'productId',
-        otherKey: 'cartId',
+        foreignKey: 'product_id',
+        otherKey: 'cart_id',
+        as: 'carts',  // Alias para a associação
         onDelete: 'CASCADE'
       });
     }
@@ -38,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    userId: {  // Coluna no banco de dados
+    user_id: {  // Coluna no banco de dados
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

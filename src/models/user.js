@@ -6,14 +6,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Um usuário pode ser o admin de muitos produtos
       User.hasMany(models.Product, {
-        foreignKey: 'userId',  // Nome da chave estrangeira, deve ser admin_id, não user_id
+        foreignKey: 'user_id',
         as: 'products',  // Alias para a associação
         onDelete: 'CASCADE'
       });
 
       // Um usuário tem um carrinho
       User.hasOne(models.Cart, {
-        foreignKey: 'userId',  // Nome da chave estrangeira para o usuário
+        foreignKey: 'user_id',
         as: 'cart',  // Alias para a associação
         onDelete: 'CASCADE'
       });

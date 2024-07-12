@@ -6,22 +6,22 @@ module.exports = {
     await queryInterface.bulkInsert('cart_items', [
       {
         quantity: 1,
-        productId: 1,  // Certifique-se de que o Product com ID 1 existe
-        cartId: 1,     // Certifique-se de que o Cart com ID 1 existe
+        product_id: 1,  // Certifique-se de que o Product com ID 1 existe
+        cart_id: 1,     // Certifique-se de que o Cart com ID 1 existe
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         quantity: 2,
-        productId: 2,  // Certifique-se de que o Product com ID 2 existe
-        cartId: 1,     // Certifique-se de que o Cart com ID 1 existe
+        product_id: 2,  // Certifique-se de que o Product com ID 2 existe
+        cart_id: 1,     // Certifique-se de que o Cart com ID 1 existe
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         quantity: 3,
-        productId: 3,  // Certifique-se de que o Product com ID 3 existe
-        cartId: 1,     // Certifique-se de que o Cart com ID 1 existe
+        product_id: 3,  // Certifique-se de que o Product com ID 3 existe
+        cart_id: 1,     // Certifique-se de que o Cart com ID 1 existe
         createdAt: new Date(),
         updatedAt: new Date()
       }

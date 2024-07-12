@@ -7,17 +7,17 @@ module.exports = {
     await queryInterface.bulkInsert('carts', [
       {
 
-        userId: 1,
+        user_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        userId: 1,
+        user_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        userId: 1,
+        user_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }

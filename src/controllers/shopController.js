@@ -23,26 +23,35 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const { productId } = req.params;
+  const Cart = db.Cart;
 
   // This  approach returns an array.
   //Or do this: Retorna um array.
-  // Product.findAll({ where: { id: productId } })
-  //   .then((product) =>
-  //     res.render('shop/product-detail', {
-  //       product: product[0],
-  //       pageTitle: 'Product',
-  //       path: '/product/productId'
-  //     }))
-  //   .catch(err => console.log(err))
+  db.Product.findAll({
+    where: { id: productId }, include: [{
+      model: Cart,
+      as: 'carts' // Usando o alias definido
+    }]
+  })
+    .then((product) =>
 
-  db.Product.findByPk(productId).then((product) => {
-    //console.log(product);
-    res.render('shop/product-detail', {
-      product: product,
-      pageTitle: 'Product',
-      path: '/product/productId'
-    })
-  }).catch(err => console.log(err))
+      res.render('shop/product-detail', {
+        product: product[0],
+        pageTitle: 'Product',
+        path: '/product/productId'
+      })
+    )
+    .catch(err => console.log(err))
+
+  // db.Product.findByPk(productId).then((product) => {
+  //   //console.log(product);
+  //   res.render('shop/product-detail', {
+  //     product: product,
+  //     pageTitle: 'Product',
+  //     path: '/product/productId'
+  //   })
+  // })
+  // .catch(err => console.log(err))
 
 }
 
@@ -98,7 +107,7 @@ exports.postCart = (req, res, next) => {
       }
 
       if (product) {
-        const oldQuantity = product.cartItem.quantity;
+        const oldQuantity = product.CartItem.quantity;
         newQuantity = oldQuantity + 1;
         return product;
       }

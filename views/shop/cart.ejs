@@ -12,7 +12,8 @@
             <% for (let product of products) { %>
               <li class="container-cart">
                <div class="cart-items-container">
-               <p> <%=product.title %>(<%=product.CartItem.quantity %>)</p>
+               <p> <%=product.title %></p>
+               <p>quantity:  <%=product.CartItem.quantity %></p>
                <form action="/cart-delete-item" method="POST">
                 <input type="hidden" name="productId" value="<%= product.id %>"/>
                 <button class="btn" type="submit" >

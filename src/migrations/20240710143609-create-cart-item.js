@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      productId: {
+      product_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -22,7 +22,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
-      cartId: {
+      cart_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -43,16 +43,8 @@ module.exports = {
       }
     });
 
-    // Adiciona índices para as chaves estrangeiras
-    await queryInterface.addIndex('cart_items', ['productId']);
-    await queryInterface.addIndex('cart_items', ['cartId']);
 
-    // Adiciona um índice único para evitar duplicação de produto em um carrinho
-    await queryInterface.addConstraint('cart_items', {
-      fields: ['cartId', 'productId'],
-      type: 'unique',
-      name: 'unique_cart_product'
-    });
+
   },
 
   async down(queryInterface, Sequelize) {
