@@ -20,14 +20,15 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
 
+      // Um produto pode estar em muitos pedidos e um pedido pode ter muitos produtos
 
-      // Product.belongsToMany(models.Order, {
-      //   through: models.OrderItem,
-      //   foreignKey: 'product_id',
-      //   otherKey: 'order_id',
-      //   as: 'prodOrders',  // Alias para a associação
-      //   onDelete: 'CASCADE'
-      // });
+      Product.belongsToMany(models.Order, {
+        through: models.OrderItem,
+        foreignKey: 'product_id',
+        otherKey: 'order_id',
+        as: 'prodOrders',  // Alias para a associação
+        onDelete: 'CASCADE'
+      });
     }
   }
 

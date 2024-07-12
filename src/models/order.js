@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
 
-      // Um carrinho pode ter muitos produtos e um produto pode estar em muitos carrinhos
+      // Um pedido pode ter muitos produtos e um produto pode estar em muitos pedidos
       Order.belongsToMany(models.Product, {
         through: models.OrderItem,
         foreignKey: 'order_id',
