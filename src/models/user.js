@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
 
+      User.hasMany(models.Order, {
+        foreignKey: 'user_id',
+        as: 'orders',  // Alias para a associação
+        onDelete: 'CASCADE'
+      });
+
       // Um usuário tem um carrinho
       User.hasOne(models.Cart, {
         foreignKey: 'user_id',

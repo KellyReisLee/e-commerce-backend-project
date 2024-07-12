@@ -5,15 +5,15 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('cart_items', [
       {
-        quantity: 1,
+        quantity: 2,
         product_id: 1,  // Certifique-se de que o Product com ID 1 existe
         cart_id: 1,     // Certifique-se de que o Cart com ID 1 existe
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        quantity: 2,
-        product_id: 2,  // Certifique-se de que o Product com ID 2 existe
+        quantity: 4,
+        product_id: 3,  // Certifique-se de que o Product com ID 2 existe
         cart_id: 1,     // Certifique-se de que o Cart com ID 1 existe
         createdAt: new Date(),
         updatedAt: new Date()
