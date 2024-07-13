@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
       // Um item de carrinho pertence a um produto
       OrderItem.belongsTo(models.Product, {
         foreignKey: 'product_id',
-        as: 'orderProducts',  // Alias para a associação
+        as: 'product',  // Alias para a associação
         onDelete: 'CASCADE'
       });
 
       // Um item de carrinho pertence a um carrinho
       OrderItem.belongsTo(models.Order, {
         foreignKey: 'order_id',
-        as: 'ordersOrder',  // Alias para a associação
+        as: 'order',  // Alias para a associação
         onDelete: 'CASCADE'
       });
 

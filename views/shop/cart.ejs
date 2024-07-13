@@ -5,9 +5,8 @@
    
     <%-include('../includes/navigation.ejs') %>
     <main>
-
-      <h1 class="title"> Your Cart Products</h1>
         <% if (products.length >0) { %>
+          <h1 class="title"> Your Cart Products</h1>
           <ul class="ul-cart">
             <% for (let product of products) { %>
               <li class="container-cart">
@@ -16,7 +15,7 @@
                <p>quantity:  <%=product.CartItem.quantity %></p>
                <form action="/cart-delete-item" method="POST">
                 <input type="hidden" name="productId" value="<%= product.id %>"/>
-                <button class="btn" type="submit" >
+                <button class="btn " type="submit" >
                   Delete
                 </button>
                </form>
@@ -25,6 +24,12 @@
               </li>
               <% } %>
           </ul>
+          <hr/>
+         <div class="centered">
+          <form action="/create-order" method="post">
+            <button type="submit" class="btn ">Order now!</button>
+          </form>
+         </div>
         <% } else { %>
           <h1 class="not-found">No products in Cart!</h1>
         <% } %>

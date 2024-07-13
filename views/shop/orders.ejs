@@ -1,12 +1,40 @@
-<%-include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/product.css" />
-  </head>
-  <body>
-   
-    <%-include('../includes/navigation.ejs') %>
-<main>
-  <h1 class="not-found">Nothing yet in orders!</h1>
-</main>
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css" />
 
+    </head>
 
-    <%-include('../includes/end.ejs') %>
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (orders.length <= 0) { %>
+                <h1>Nothing there!</h1>
+            <% } else { %>
+                <ul class="order-main">
+                    <% orders.forEach(order => { %>
+                        <li class="order-container">
+                          <h1 class="index"># <%= order.id %></h1>
+                            <ul class="order-content">
+                           
+                                <% order.products.forEach(product => { %>
+                               
+                                    <li class="order-box">
+                                     
+                                      <div class="img-order">
+                                        <img 
+                                        class="image-order" 
+                                        src="<%- product.imageUrl %>" 
+                                        alt="<%- product.title %>"
+                                        onerror="this.onerror=null;this.src='/noImage.jpg';"
+                                        />
+                                      </div>
+                                      <p><%= product.title %> </p>
+                                      <p>Quantity: <%= product.OrderItem.quantity %></p>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>

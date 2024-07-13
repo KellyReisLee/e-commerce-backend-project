@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Order.belongsTo(models.User, {
         foreignKey: 'user_id',  // Nome da chave estrangeira no banco de dados
-        as: 'userOrder',  // Alias para a associação
+        as: 'user',  // Alias para a associação
         onDelete: 'CASCADE'
       });
 
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         through: models.OrderItem,
         foreignKey: 'order_id',
         otherKey: 'product_id',
-        as: 'orderProduct',  // Alias para a associação
+        as: 'products',  // Alias para a associação
         onDelete: 'CASCADE'
       });
     }

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         through: models.OrderItem,
         foreignKey: 'product_id',
         otherKey: 'order_id',
-        as: 'prodOrders',  // Alias para a associação
+        as: 'products',  // Alias para a associação
         onDelete: 'CASCADE'
       });
     }
